@@ -35,7 +35,7 @@ class LoginController extends Controller
 
                     default:
                         Auth::logout();
-                        return redirect()->route('adminLogin.login')->with('message', 'Wrong Email & Password');
+                        return redirect()->route('admin.login')->with('message', 'Wrong Email & Password');
                 }
             } else {
                 return redirect()->back()->with('error', 'Wrong email or password. Please try again.');

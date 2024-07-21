@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Branch\BranchController as BranchBranchController;
+use App\Http\Controllers\Branch\ExpenseController;
 use App\Http\Controllers\Branch\LoginController as BranchLoginController;
 use App\Http\Controllers\Branch\StudentController as BranchStudentController;
 use App\Http\Controllers\khskjds;
@@ -34,7 +35,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
     });
 
-    // Branch Login Routes
+
+    // Branch Dashboard Route Define Here 
     Route::prefix('branch-dashboard')->middleware(['auth', 'branch'])->name('branch-dashboard.')->group(function () {
         Route::get('', [BranchBranchController::class, 'index'])->name('index');
         Route::get('profile', [BranchLoginController::class, 'profile'])->name('profile');
@@ -44,6 +46,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::match(['GET', 'POST'], 'add', [BranchStudentController::class, 'studentAdd'])->name('add');
             Route::match(['GET', 'POST'], 'edit/{slug}', [BranchStudentController::class, 'studentEdit'])->name('edit');
             Route::get('del/{slug}', [BranchStudentController::class, 'studentDel'])->name('del');
+        });
+        Route::prefix('expense')->name('expense.')->group(function () {
+            Route::match(['GET', 'POST'], 'expense', [ExpenseController::class, 'expense'])->name('expense');
+
         });
     });
 });
